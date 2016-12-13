@@ -1,0 +1,82 @@
+.main-nav,.main-header,.nav-div{
+	.stacked-ul{
+		position: absolute;
+		left:100%!important;
+	}
+	ul li.brand{
+		display: inline-block;
+		width: 220px;
+		&:hover{background-color:transparent!important;}
+	}
+	ul li.no-hover:hover{background-color:transparent!important;}
+	ul li a.brand{
+		padding: 0px;
+		position:absolute;
+		top:0px;
+		left:0px;right:0px;
+		margin-left:10px;
+		max-height:95px;
+		overflow: hidden;
+		i{line-height:.5;}
+		img{width:100%;}
+	}
+	.menu-wrapper{
+		position: absolute;
+		top: 0px;
+		left:-100%;
+		min-height:none;
+		display: block;
+		@include transition(left .3s ease-in-out);
+	}
+	ul.active, ul.origin{display: block;}
+}
+
+.white-nav{
+	@include color-nav($color:#fff,$activeColor:#fff,$textColor:#424242,$textAColor:#424242);
+	@include drop-shadow();
+	@media screen and (max-width: 1080px) {
+		ul li{
+			background-color: #fff;
+			color:#424242!important;
+			a{color:#424242!important;}
+		}
+	}
+}
+.grey-nav{
+	@include color-nav($color:#eaeaea,$activeColor:#eaeaea,$textColor:#424242,$textAColor:#424242);
+	@media screen and (max-width: 1080px) {
+		ul li{
+			background-color: #eaeaea;
+			color:#424242!important;
+			a{color:#424242!important;}
+		}
+	}
+}
+.yellow-nav{
+	@include color-nav($color:#c07813,$activeColor:#c07813,$textColor:#fff,$textAColor:#fff);
+	@media screen and (max-width: 1080px) {
+		ul li{
+			background-color: #c07813;
+			color:#fff!important;
+			a{color:#fff!important;}
+		}
+	}
+}
+.light-yellow-nav{
+	@include color-nav($color:#fdb71e,$activeColor:#fdb71e,$textColor:#fff,$textAColor:#fff);
+	@media screen and (max-width: 1080px) {
+		ul li{
+			background-color: #fdb71e;
+			color:#fff!important;
+			a{color:#fff!important;}
+		}
+	}
+}
+
+.white-banner{
+	@include drop-shadow();
+	background-color: #fff;
+	width:100%;
+	position:relative;
+	display:block;
+}

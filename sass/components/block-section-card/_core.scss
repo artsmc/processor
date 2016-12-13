@@ -1,0 +1,39 @@
+.editor.app .section.card{
+	background:#fff;
+	padding:10px 20px;
+	width:100%;
+	position:relative;
+	min-height:80px;
+	@include transition('background-color 250ms ease');
+	.content{
+		background:#fff;
+		min-height: 50px;
+		padding:10px;
+		cursor: pointer;
+	}
+	.inline-buttons{
+		opacity: 0;
+		position: absolute;
+		bottom:0px;right:0px;
+		@include transition('opacity 250ms ease');
+	}
+	&:hover{
+		background:#D8EDFA;
+		.inline-buttons{opacity:1;}
+		cursor:move;
+	}
+}
+@media (max-width: 400px) {
+	/*.hprc.footer-nav{
+		min-height: 180px;
+		border-bottom: 1px solid #d8d8d8;
+		width:100%;
+		ul{
+			position: relative;
+			clear: both;
+			&:before,&:after{clear:both;}
+			li{width:100%;overflow:hidden;margin:0px;}
+			li a{width:100%;overflow:hidden;margin:0px;}
+		}
+	}*/
+}

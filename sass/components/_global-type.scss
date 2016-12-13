@@ -1,0 +1,260 @@
+body {
+	 font-size: 14px;
+	 min-height: 100%;
+	 font-family: "Avenir LT Std 65 Medium",'Avenir','Helvetica-Nauve','Helvetica',sans-serif;
+	 line-height: 20px;
+}
+
+h1 {
+	 font-size: 2.438em;
+	 line-height: 1.077em;
+	 margin: 0px 0px 0.256em 0px;
+	 font-weight: 400;
+	 font-style: normal;
+	 font-family: Georgia;
+}
+
+h2 {
+	 font-size: 2.25em;
+	 line-height: 1.028em;
+	 margin: 0px 0px 0.417em 0px;
+}
+
+h3 {
+	 font-size: 1.75em;
+	 line-height: 1.14em;
+	 margin: 0px 0px 0.357em 0px;
+	 font-family: "Avenir LT Std 95 Black";
+}
+
+h4 {
+	 font-weight: 600;
+	 font-style: normal;
+	 margin: 0px 0px 0.682em 0px;
+	 font-size: 1.375em;
+	 line-height: 1.136em;
+}
+
+p {
+	 margin: 0px 0px 25px 0px;
+	 text-transform: inherit;
+	 font-size: 1em;
+	 font-family: "Avenir LT Std 65 Medium",'Avenir','Helvetica-Nauve','Helvetica',sans-serif;
+	 line-height: 1.563em;
+}
+
+p.intro {
+	 font-size: 1em;
+	 line-height: 25px;
+	 margin: 0px 0px 13px 0px;
+	 font-family: Georgia;
+	 font-weight: 400;
+	 font-style: normal;
+}
+
+blockquote.pull-quote {
+	 margin: 0em 1em 1em 0em;
+	 border-left: 3px solid #ccc;
+	 padding: 0em 0em 0em 0.7em;
+}
+
+div.content {
+	 margin: 0 auto;
+	 text-align: left;
+}
+
+h5 {
+	 margin: 0px 0px 0.75em 0px;
+	 font-size: 1.25em;
+	 font-family: "Avenir LT Std 85 Heavy";
+	 line-height: 1.25em;
+}
+
+p.quote {
+	 font-size: 23px;
+	 line-height: 28px;
+	 font-style: italic;
+	 color: #666666;
+	 margin: 0px;
+	 float: left;
+	 text-align: left;
+}
+
+blockquote {
+	 font-size: 26px;
+	 line-height: 37px;
+	 margin-bottom: 25px;
+}
+
+g,em,i {
+	 font-size: 1em;
+	 font-family: "Georgia";
+	 font-weight: 400;
+	 font-style: italic;
+}
+
+nav.menu-nav-hz {
+	 margin: 0 auto;
+}
+
+ul.menu-hz {
+	 margin: 0 0 1em 0;
+	 list-style: none;
+	 text-align: center;
+}
+
+li.menu-hz-li {
+	 margin: 0 0.5em 0 0.5em;
+	 font-size: 16px;
+	 display: inline-block;
+}
+
+a {
+	 color: rgba(98, 172, 201, 1);
+	 text-transform: inherit;
+}
+
+strong {
+	 font-family: "Avenir LT Std 85 Heavy";
+}
+
+h6 {
+	 font-size: 1.063em;
+	 font-family: "Avenir LT Std 95 Black";
+	 line-height: 1.18em;
+}
+
+div.pull-quote-p {
+	 width: auto;
+	 margin: 0;
+}
+
+div.pull-quote-p:before {
+	 content: "";
+	 display: table;
+}
+
+div.pull-quote-p:after {
+	 content: "";
+	 display: table;
+	 clear: both;
+}
+
+blockquote.pull-quote-left {
+	 margin: 0em 1em 1em 0em;
+	 float: left;
+	 font-size: 1.17em;
+	 line-height: 1.2em;
+	 border-left: 3px solid #ccc;
+	 padding: 0em 0em 0em 0.7em;
+	 color: #666666;
+	 clear: none;
+}
+.serif{font-family: "Georgia"}
+.sans{font-family: "Avenir LT Std 45 Book" ;}
+@media only screen and (max-width: 1024px) {
+	 
+	p {
+		margin: 0em;
+		line-height: 30px;
+	}
+
+	body {
+		 font-size: 18px;
+	}
+
+	p.intro {
+		 font-size: 1em;
+		 line-height: 1.67em;
+		 margin: 0px 0px 0.722em 0px;
+	}
+
+	h1 {
+		 font-size: 2.438em;
+		 line-height: 1.077em;
+		 margin: 0em 0em 0.456em 0em;
+	}
+
+	h2 {
+		 font-size: 2.25em;
+		 line-height: 1.028em;
+		 margin: 0em 0em 0.49em 0em;
+	}
+
+	h3 {
+		 margin: 0em 0em 0.357em 0em;
+		 font-size: 1.75em;
+		 line-height: 1.14em;
+	}
+
+	h6 {
+		 margin: 0px 0px 0.588em 0px;
+	}
+
+
+}
+@media only screen and (max-width: 320px) {
+	
+	p {
+		padding: 0em;
+		font-size: 1em;
+		line-height: 1.667em;
+	}
+	h1 {
+		 font-size: 1.333em;
+		 line-height: 0.959em;
+		 margin: 0px 0px 0.834em 0px;
+	}
+
+	p.intro {
+		 font-size: 1em;
+		 line-height: 1.67em;
+		 margin: 0px 0px 1.5em 0px;
+	}
+
+	h2 {
+		 font-size: 1.389em;
+		 line-height: 1.028em;
+		 margin: 0em 0em 0.49em 0em;
+	}
+
+	h3 {
+		 font-size: 1.278em;
+		 line-height: 1.14em;
+		 margin: 0em 0em 0.357em 0em;
+	}
+
+	h4 {
+		 font-size: 1.111em;
+		 line-height: 1.136em;
+		 margin: 0em 0em 0.682em 0em;
+	}
+
+	h5 {
+		 font-size: 17px;
+		 margin: 0em 0em 0.75em 0em;
+	}
+
+	h6 {
+		 font-size: 0.944em;
+		 margin: 0em 0em 0.588em 0em;
+		 line-height: 1.18em;
+	}
+
+	p.quote {
+		 clear: both;
+		 padding: 1em;
+		 font-size: 16px;
+	}
+
+	a {
+		 font-size: 1em;
+		 line-height: 1.667em;
+	}
+
+	strong {
+		font-size: 1em;
+		line-height: 1.667em;
+	}
+
+}

@@ -1,0 +1,95 @@
+
+
+@mixin make-plain-button(
+        $defaultHeight:1em,
+        $defaultLine:1em,
+        $defaultColor:#e0e1e2
+    ){
+        line-height: $defaultLine;
+        min-height: $defaultHeight;
+        background-color: $defaultColor;
+        position:relative;
+        outline: 0;
+        border: none;
+        text-align:center;
+        vertical-align: baseline;
+        text-transform: none;
+        text-shadow: none;    
+        font-style: normal;
+        display: inline-block;
+        @include user-select();
+        @include border-radius(4px);
+        @include backface();
+        @include transition('background-color 250ms ease');
+        padding:1em 2em;  
+        cursor:pointer;
+        width: auto; 
+        &:hover{
+            background-color: darken($defaultColor,20%);
+        }
+        &:active{
+            background-color: darken($defaultColor,35%);
+        }
+}
+@mixin make-naked-button(
+        $defaultHeight:1em,
+        $defaultLine:1em,
+        $defaultColor:#d7d7d7
+    ){
+        line-height: $defaultLine;
+        min-height: $defaultHeight;
+        color:$defaultColor;
+        background-color: transparent;
+        position:relative;
+        outline: 0;
+        border: none;
+        text-align:center;
+        vertical-align: baseline;
+        text-transform: none;
+        text-shadow: none;    
+        font-style: normal;
+        display: inline-block;
+        @include user-select();
+        @include border-radius(0px);
+        @include backface();
+        @include transition('color 250ms ease');
+        padding:1em 2em;  
+        cursor:pointer;
+        width: auto; 
+        &:hover{
+            color: darken($defaultColor,20%);
+        }
+        &:active{
+            color: darken($defaultColor,35%);
+        }
+}
+
+
+
+
+//-----------------GRID-------------------------
+    @mixin make-button-grid($gridColumns: 10,$gridColumnWidth: 5px,$gridGutterWidth: 29px,$columnname:btn){
+        @for $i from 1 through $gridColumns {
+            .#{$columnname}#{$i}{
+                width: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1)) - $gridGutterWidth;
+                    }
+        }
+        [class*='#{$columnname}'] {
+            min-height: 1px; // prevent collapsing columns
+            position:relative;
+        }
+    }
+    @mixin make-button-gridFluid($gridColumns: 24,$gridMinWidth: 50px,$gridWidth: 200px,$columnname:btnFluid-){
+        
+        @for $i from 1 through $gridColumns {
+            &.#{$columnname}#{$i}{
+                min-width: $gridMinWidth;
+                max-width: $gridWidth;
+                width: (($i/$gridColumns)*100%);
+                    }
+        }
+        &[class*='#{$columnname}'] {
+            min-height: 1px; // prevent collapsing columns
+            position:relative;
+        }
+    }

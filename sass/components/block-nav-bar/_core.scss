@@ -1,0 +1,35 @@
+.editor.app .nav-bar{
+	@include make-responsive-navbar(46px, $desktop:400px);
+	position:absolute;
+	top:0px;left:0px;
+	background-color:#535353;
+	display:block;
+	ul li a,ul li p {
+		margin:0px;
+		line-height: 25px;
+	    padding: 16.66664px 10px;
+	}
+	ul li.logo a{
+		padding:9px;
+	}
+	ul li.image{
+		&:hover{background-color:transparent;}
+	}
+	ul li.image a{
+		padding:0px;
+	}
+}
+@media (max-width: 400px) {
+	/*.hprc.footer-nav{
+		min-height: 180px;
+		border-bottom: 1px solid #d8d8d8;
+		width:100%;
+		ul{
+			position: relative;
+			clear: both;
+			&:before,&:after{clear:both;}
+			li{width:100%;overflow:hidden;margin:0px;}
+			li a{width:100%;overflow:hidden;margin:0px;}
+		}
+	}*/
+}

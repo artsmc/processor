@@ -1,0 +1,772 @@
+@import "variables";
+
+@font-face {
+  font-family: 'OPSS';
+  src:  url('#{$icomoon-font-path}/OPSS.eot?hhz6qs');
+  src:  url('#{$icomoon-font-path}/OPSS.eot?hhz6qs#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/OPSS.ttf?hhz6qs') format('truetype'),
+    url('#{$icomoon-font-path}/OPSS.woff?hhz6qs') format('woff'),
+    url('#{$icomoon-font-path}/OPSS.svg?hhz6qs#OPSS') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.opss {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'OPSS' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.op-1x{font-size:100%;}
+.op-2x{font-size:200%;}
+.op-3x{font-size:300%;}
+.op-4x{font-size:400%;}
+.op-5x{font-size:500%;}
+.op-active-brain {
+  &:before {
+    content: $op-active-brain;
+  }
+}
+.op-ambulance {
+  &:before {
+    content: $op-ambulance;
+  }
+}
+.op-apple {
+  &:before {
+    content: $op-apple;
+  }
+}
+.op-bandage {
+  &:before {
+    content: $op-bandage;
+  }
+}
+.op-bandaid {
+  &:before {
+    content: $op-bandaid;
+  }
+}
+.op-bed {
+  &:before {
+    content: $op-bed;
+  }
+}
+.op-blood {
+  &:before {
+    content: $op-blood;
+  }
+}
+.op-board {
+  &:before {
+    content: $op-board;
+  }
+}
+.op-books {
+  &:before {
+    content: $op-books;
+  }
+}
+.op-bottle-energy-o {
+  &:before {
+    content: $op-bottle-energy-o;
+  }
+}
+.op-bottle-energy {
+  &:before {
+    content: $op-bottle-energy;
+  }
+}
+.op-bottle-o {
+  &:before {
+    content: $op-bottle-o;
+  }
+}
+.op-bottle {
+  &:before {
+    content: $op-bottle;
+  }
+}
+.op-bottles-energy {
+  &:before {
+    content: $op-bottles-energy;
+  }
+}
+.op-bottles {
+  &:before {
+    content: $op-bottles;
+  }
+}
+.op-bright-brain {
+  &:before {
+    content: $op-bright-brain;
+  }
+}
+.op-brokentooth {
+  &:before {
+    content: $op-brokentooth;
+  }
+}
+.op-capsule {
+  &:before {
+    content: $op-capsule;
+  }
+}
+.op-cert {
+  &:before {
+    content: $op-cert;
+  }
+}
+.op-chair {
+  &:before {
+    content: $op-chair;
+  }
+}
+.op-chales {
+  &:before {
+    content: $op-chales;
+  }
+}
+.op-checklist {
+  &:before {
+    content: $op-checklist;
+  }
+}
+.op-cherries {
+  &:before {
+    content: $op-cherries;
+  }
+}
+.op-clock {
+  &:before {
+    content: $op-clock;
+  }
+}
+.op-copter {
+  &:before {
+    content: $op-copter;
+  }
+}
+.op-disolve {
+  &:before {
+    content: $op-disolve;
+  }
+}
+.op-dna {
+  &:before {
+    content: $op-dna;
+  }
+}
+.op-doctor {
+  &:before {
+    content: $op-doctor;
+  }
+}
+.op-doctors {
+  &:before {
+    content: $op-doctors;
+  }
+}
+.op-download-doc {
+  &:before {
+    content: $op-download-doc;
+  }
+}
+.op-dropper {
+  &:before {
+    content: $op-dropper;
+  }
+}
+.op-dropping {
+  &:before {
+    content: $op-dropping;
+  }
+}
+.op-dunbells {
+  &:before {
+    content: $op-dunbells;
+  }
+}
+.op-edit {
+  &:before {
+    content: $op-edit;
+  }
+}
+.op-ekgmonitor {
+  &:before {
+    content: $op-ekgmonitor;
+  }
+}
+.op-elixer {
+  &:before {
+    content: $op-elixer;
+  }
+}
+.op-eye {
+  &:before {
+    content: $op-eye;
+  }
+}
+.op-fax {
+  &:before {
+    content: $op-fax;
+  }
+}
+.op-fda {
+  &:before {
+    content: $op-fda;
+  }
+}
+.op-female {
+  &:before {
+    content: $op-female;
+  }
+}
+.op-fingerprint {
+  &:before {
+    content: $op-fingerprint;
+  }
+}
+.op-flex {
+  &:before {
+    content: $op-flex;
+  }
+}
+.op-gavel {
+  &:before {
+    content: $op-gavel;
+  }
+}
+.op-genders {
+  &:before {
+    content: $op-genders;
+  }
+}
+.op-glass {
+  &:before {
+    content: $op-glass;
+  }
+}
+.op-glasses {
+  &:before {
+    content: $op-glasses;
+  }
+}
+.op-graph-up {
+  &:before {
+    content: $op-graph-up;
+  }
+}
+.op-gurney {
+  &:before {
+    content: $op-gurney;
+  }
+}
+.op-handicap {
+  &:before {
+    content: $op-handicap;
+  }
+}
+.op-hazard {
+  &:before {
+    content: $op-hazard;
+  }
+}
+.op-hbeat {
+  &:before {
+    content: $op-hbeat;
+  }
+}
+.op-heart {
+  &:before {
+    content: $op-heart;
+  }
+}
+.op-hIcon {
+  &:before {
+    content: $op-hIcon;
+  }
+}
+.op-hope {
+  &:before {
+    content: $op-hope;
+  }
+}
+.op-hospital {
+  &:before {
+    content: $op-hospital;
+  }
+}
+.op-info {
+  &:before {
+    content: $op-info;
+  }
+}
+.op-iv {
+  &:before {
+    content: $op-iv;
+  }
+}
+.op-key {
+  &:before {
+    content: $op-key;
+  }
+}
+.op-lens {
+  &:before {
+    content: $op-lens;
+  }
+}
+.op-love-hosue {
+  &:before {
+    content: $op-love-hosue;
+  }
+}
+.op-magnify {
+  &:before {
+    content: $op-magnify;
+  }
+}
+.op-male {
+  &:before {
+    content: $op-male;
+  }
+}
+.op-mask {
+  &:before {
+    content: $op-mask;
+  }
+}
+.op-measure-tape {
+  &:before {
+    content: $op-measure-tape;
+  }
+}
+.op-medicine {
+  &:before {
+    content: $op-medicine;
+  }
+}
+.op-medkit {
+  &:before {
+    content: $op-medkit;
+  }
+}
+.op-megaphone {
+  &:before {
+    content: $op-megaphone;
+  }
+}
+.op-milk {
+  &:before {
+    content: $op-milk;
+  }
+}
+.op-mind {
+  &:before {
+    content: $op-mind;
+  }
+}
+.op-morge {
+  &:before {
+    content: $op-morge;
+  }
+}
+.op-nametag {
+  &:before {
+    content: $op-nametag;
+  }
+}
+.op-needle {
+  &:before {
+    content: $op-needle;
+  }
+}
+.op-notebook {
+  &:before {
+    content: $op-notebook;
+  }
+}
+.op-nurse {
+  &:before {
+    content: $op-nurse;
+  }
+}
+.op-opss .path1 {
+  &:before {
+    content: $op-opss-path1;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path2 {
+  &:before {
+    content: $op-opss-path2;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path3 {
+  &:before {
+    content: $op-opss-path3;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path4 {
+  &:before {
+    content: $op-opss-path4;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path5 {
+  &:before {
+    content: $op-opss-path5;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path6 {
+  &:before {
+    content: $op-opss-path6;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path7 {
+  &:before {
+    content: $op-opss-path7;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path8 {
+  &:before {
+    content: $op-opss-path8;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path9 {
+  &:before {
+    content: $op-opss-path9;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path10 {
+  &:before {
+    content: $op-opss-path10;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path11 {
+  &:before {
+    content: $op-opss-path11;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path12 {
+  &:before {
+    content: $op-opss-path12;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path13 {
+  &:before {
+    content: $op-opss-path13;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path14 {
+  &:before {
+    content: $op-opss-path14;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path15 {
+  &:before {
+    content: $op-opss-path15;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path16 {
+  &:before {
+    content: $op-opss-path16;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path17 {
+  &:before {
+    content: $op-opss-path17;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path18 {
+  &:before {
+    content: $op-opss-path18;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path19 {
+  &:before {
+    content: $op-opss-path19;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path20 {
+  &:before {
+    content: $op-opss-path20;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path21 {
+  &:before {
+    content: $op-opss-path21;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path22 {
+  &:before {
+    content: $op-opss-path22;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path23 {
+  &:before {
+    content: $op-opss-path23;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path24 {
+  &:before {
+    content: $op-opss-path24;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path25 {
+  &:before {
+    content: $op-opss-path25;  
+    margin-left: -0.78125em;  
+    color: rgb(150, 150, 150);
+  }
+}
+.op-opss .path26 {
+  &:before {
+    content: $op-opss-path26;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path27 {
+  &:before {
+    content: $op-opss-path27;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path28 {
+  &:before {
+    content: $op-opss-path28;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path29 {
+  &:before {
+    content: $op-opss-path29;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path30 {
+  &:before {
+    content: $op-opss-path30;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path31 {
+  &:before {
+    content: $op-opss-path31;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path32 {
+  &:before {
+    content: $op-opss-path32;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path33 {
+  &:before {
+    content: $op-opss-path33;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path34 {
+  &:before {
+    content: $op-opss-path34;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-opss .path35 {
+  &:before {
+    content: $op-opss-path35;  
+    margin-left: -0.78125em;  
+    color: rgb(0, 0, 0);
+  }
+}
+.op-orgchart {
+  &:before {
+    content: $op-orgchart;
+  }
+}
+.op-pad {
+  &:before {
+    content: $op-pad;
+  }
+}
+.op-pen {
+  &:before {
+    content: $op-pen;
+  }
+}
+.op-pencil {
+  &:before {
+    content: $op-pencil;
+  }
+}
+.op-phone {
+  &:before {
+    content: $op-phone;
+  }
+}
+.op-pill {
+  &:before {
+    content: $op-pill;
+  }
+}
+.op-power {
+  &:before {
+    content: $op-power;
+  }
+}
+.op-printer {
+  &:before {
+    content: $op-printer;
+  }
+}
+.op-projection {
+  &:before {
+    content: $op-projection;
+  }
+}
+.op-sandtime {
+  &:before {
+    content: $op-sandtime;
+  }
+}
+.op-scale {
+  &:before {
+    content: $op-scale;
+  }
+}
+.op-scissors {
+  &:before {
+    content: $op-scissors;
+  }
+}
+.op-shield {
+  &:before {
+    content: $op-shield;
+  }
+}
+.op-stamp {
+  &:before {
+    content: $op-stamp;
+  }
+}
+.op-stethoscope {
+  &:before {
+    content: $op-stethoscope;
+  }
+}
+.op-syrup {
+  &:before {
+    content: $op-syrup;
+  }
+}
+.op-tack {
+  &:before {
+    content: $op-tack;
+  }
+}
+.op-telephone {
+  &:before {
+    content: $op-telephone;
+  }
+}
+.op-themometer {
+  &:before {
+    content: $op-themometer;
+  }
+}
+.op-timepad {
+  &:before {
+    content: $op-timepad;
+  }
+}
+.op-timer {
+  &:before {
+    content: $op-timer;
+  }
+}
+.op-tone {
+  &:before {
+    content: $op-tone;
+  }
+}
+.op-tooth {
+  &:before {
+    content: $op-tooth;
+  }
+}
+.op-utisels {
+  &:before {
+    content: $op-utisels;
+  }
+}
+.op-weight {
+  &:before {
+    content: $op-weight;
+  }
+}
+

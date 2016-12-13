@@ -1,0 +1,267 @@
+
+
+@mixin make-basic-header(
+        $defaultHeight:40px,
+        $defaultLine:1em,
+        $defaultColor:#e0e1e2
+    ){
+        line-height: $defaultLine;
+        height: $defaultHeight;
+        background-color: $defaultColor;
+        display: inline-block;
+        position: relative;
+        padding: 1em;
+        @include user-select();
+        @include backface();
+        width: 100%;
+        vertical-align: baseline;
+        text-transform: none;
+        text-shadow: none;    
+        font-style: normal;
+}
+
+@mixin make-basic-navbar($height:30px,$device:1){
+    @include transition(height .3s ease-in-out);
+    display:block;
+    min-height:$height/$device;
+    position:relative;
+    z-index:15;
+    width:100%;
+    ul{
+        display:block;
+        height:$height/$device;  
+        width:auto;
+        margin:0px;padding:0px;
+        margin-right:-4px/$device;
+        position:relative;
+    }
+    .ul-right{
+        position:absolute;right:6px/$device;top:0px/$device;
+        li{
+            //position:absolute;
+            //right:0px;
+            display:block;
+            padding-right:2px;
+        }
+    }
+    .ul-center{
+        text-align: center;
+        @include clearfix();
+        margin-top:0px;
+        width:100%;
+        li{ 
+            position: relative;
+            float: none;
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+        }
+    }
+    .ul-left{float:left;}
+    .brand{padding:0px 10px/$device;a{margin-top:12px;}}
+    ul li {
+        float:left;
+        overflow:hidden;
+        position:relative;
+        min-width: 50px;
+        max-width:225px;
+        text-align: center;
+        height: $height;
+        margin-right:-4px/$device;
+        text-indent:0px;
+        list-style:none;
+        line-height:$height/$device;
+    }
+    a{
+        display:block;
+        text-decoration:none; 
+        position:relative;
+        padding:2px/$device 10px/$device;
+    }
+}
+
+@mixin make-responsive-navbar($height:30px, $mobile:1079px,$desktop:1080px){
+    display:block;
+    min-height:$height;
+    position:relative;
+    z-index:15;
+    width:100%;  
+
+    ul{
+        display:block;
+        height:$height;  
+        margin:0px;padding:0px;
+        position:relative;
+    }
+    ul li {
+        display:block;
+        float:left;
+        position:relative;
+        text-align: center;
+        text-indent:0px;
+        list-style:none;
+        //margin:0px 10px;
+        min-width: 50px;
+        min-height: $height;
+        line-height:inherit;
+        &:hover, &:focus, &.focus{ 
+            ul{
+                max-height: 83vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+        };
+    }
+    ul li a{
+        width:100%;
+        min-height: $height;
+        display: block;
+        text-align: center;
+        line-height: $height/2-2;
+    }
+    ul li > ul{
+        display:block;
+        @include transition('max-height 220ms ease-in-out');
+        position:absolute;
+        top:$height;
+        left:0px;
+        height:auto;
+        max-height:0px;
+        overflow: hidden;
+    }
+    ul li > ul,.ul-center li > ul, .ul-left li > ul, .ul-right li > ul{
+        min-width: 225px;
+        li{
+            line-height:150%;
+            display:block;
+            text-align: left;
+            width:100%;
+            margin:5px 5px;
+        }
+    }
+    ul li > ul li > ul,.ul-center li > ul> ul li > ul, .ul-left li > ul li > ul, .ul-right li > ul li > ul{
+        position:relative;
+        display: block;
+        top:0px;
+        height: auto;
+    }
+    .ul-center{
+        text-align: center;
+        @include clearfix();
+        margin-top:0px;
+        width:100%;
+        li{ 
+            position: relative;
+            float: none;
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+        }
+    }
+    .ul-left{float:left;}
+    .ul-right{
+        position:absolute;
+        top:0px;right:0px;
+        li{
+            //position:absolute;
+            //right:0px;
+        }
+        li:last-child{
+            margin-right:10px;
+        }
+    }
+    >label{display: none;}/**/
+    @media screen and (max-width: $desktop) {
+        height:auto;
+        min-width: 320px;
+        max-height:$height; 
+        overflow: hidden;
+        >label{
+            display: block;
+            position:relative;
+            text-indent:0px;
+            list-style:none;
+            padding:$height*.333333;
+            min-width: 50px;
+            min-height: $height;
+            line-height:inherit;
+        }
+        &:hover{
+            max-height:none; 
+            overflow: hidden;
+            ul{
+                max-height: none;
+                overflow-y: hidden;
+                overflow-x: hidden;
+            }
+        }
+        ul,.ul-right,.ul-left,.ul-center{
+            display: block;
+            height:auto;
+            position:relative;
+            max-height: none;
+            overflow: hidden;
+            li{text-align:left;display: inline-block;}
+        }
+        ul li{
+            width: 100%;
+            text-align: left;
+            &:hover, &:focus, .focus{ 
+                ul{
+                    max-height: none;
+                    overflow-y: hidden;
+                    overflow-x: hidden;
+                }
+            };
+        }
+        ul li a{
+            margin:0px;
+        }
+        ul li > ul{
+            display:block;
+            position:relative;
+            top:initial;
+            left:initial;
+            height:auto;
+            max-height:none;
+            overflow: hidden;
+        }
+        ul li > ul,.ul-center li > ul, .ul-left li > ul, .ul-right li > ul{
+            display: block;
+            min-width: 320px;
+            width: 100%;
+            max-height: none;
+            li{
+                line-height:150%;
+                display:block;
+                text-align: left;
+                width:100%;
+                margin:0px;
+            }
+        }/**/
+    }
+}
+
+@mixin color-nav($color:#ddd, $activeColor:$color, $textColor:#fff,$textAColor:#282828){
+    background-color:$color;
+    ul li:hover, ul li:focus, ul li.focus, ul li.active{
+        color:$textAColor;
+        a,span{color:$textAColor;}
+      background-color:$activeColor;  
+    }
+
+    ul li ul{
+    @include transition('background-color 220ms ease-in-out');
+      background-color:$activeColor;  
+    }
+    //li:hover,.brand:hover{background-color:lighten(@color,15%);}
+    color: contrast($textColor);
+    a{color: contrast($textColor);}
+    ul li,ul li a, ul li span{color:$textColor;@include transition('color 220ms ease-in-out');}
+    ul li ul li,ul li ul li a, ul li ul li span{color:$textAColor!important;}
+        ul li:hover, ul li:focus, ul li.focus{ 
+            a,span{
+                color:$textAColor;
+            }
+    }
+}
