@@ -4109,10 +4109,10 @@ textarea {
     -moz-transition: opacity 250ms ease;
     -ms-transition: opacity 250ms ease;
     -o-transition: opacity 250ms ease; }
-  .editor.app .section.card:hover {
+  .editor.app .section.card:hover, .editor.app .section.card.active {
     background: #D8EDFA;
     cursor: move; }
-    .editor.app .section.card:hover .inline-buttons {
+    .editor.app .section.card:hover .inline-buttons, .editor.app .section.card.active .inline-buttons {
       opacity: 1; }
 
 @media (max-width: 400px) {

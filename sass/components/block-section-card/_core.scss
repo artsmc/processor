@@ -17,7 +17,7 @@
 		bottom:0px;right:0px;
 		@include transition('opacity 250ms ease');
 	}
-	&:hover{
+	&:hover,&.active{
 		background:#D8EDFA;
 		.inline-buttons{opacity:1;}
 		cursor:move;
