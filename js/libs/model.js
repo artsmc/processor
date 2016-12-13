@@ -172,11 +172,11 @@ P.App = new function(options){
     }
 }
 //P.App.Store.new('Project')
-var coolSection = P.App.Store.new('Project').new('Section');
+/*var coolSection = P.App.Store.new('Project').new('Section');
 var coolThought = coolSection.new('Thought',{text:"Hello World"});
 coolSection.iterate(1);
 coolSection.new('Thought',{text:"Hello World Max Out"});
 coolSection.updateOrder(1,3);
 coolSection.removeThought(3);
-coolSection.new('Thought',{text:"Hello World Max Out"});
+coolSection.new('Thought',{text:"Hello World Max Out"});*/
 console.log(P.App)
