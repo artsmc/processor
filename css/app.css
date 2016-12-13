@@ -4135,6 +4135,7 @@ textarea {
   position: relative;
   min-height: 80px;
   max-width: 400px;
+  margin-bottom: 10px;
   -webkit-transition: background-color 250ms ease;
   -moz-transition: background-color 250ms ease;
   -ms-transition: background-color 250ms ease;
@@ -4799,6 +4800,8 @@ body {
     position: relative; }
     .wrapper > div + div .container {
       height: 100vh;
+      max-height: 100vh;
+      overflow-x: auto;
       padding: 10px; }
 
 .interior {

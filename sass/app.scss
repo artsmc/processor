@@ -285,6 +285,8 @@
 		>div{flex:.2;position:relative;}
 		>div+div{flex:.8;position:relative;.container{
 				height:100vh;
+				max-height:100vh;
+				overflow-x:auto;
 				padding:10px;
 			}
 		}

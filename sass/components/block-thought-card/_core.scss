@@ -5,6 +5,7 @@
 	position:relative;
 	min-height:80px;
 	max-width:400px;
+	margin-bottom:10px;
 	@include transition('background-color 250ms ease');
 	.content{
 		background:#fff;
