@@ -103,7 +103,7 @@ define(function (require) {
 							$('.footer button').toggleClass('hide active');
 						}
 					});
-					$('.section.card').on('click',function(e){
+					$('#section').on('click','.section.card',function(e){
 						var thisCard = $(this);
 						clickSection(thisCard);
 					});
