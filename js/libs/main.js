@@ -17,7 +17,7 @@ define(function (require) {
 								card +='<div class="content">';
 									section.Thoughts.forEach(function (thought) {
 										if(thought.state==true){
-											card +='<p>'+thought.text+'</p>';
+											card +='<p data-id='+thought.id+'>'+thought.text+'</p>';
 										}
 									});
 								card +='</div>';
@@ -36,7 +36,7 @@ define(function (require) {
 							var card='';
 							card +='<div class="thought card" data-sID='+thought.sID+' data-order='+thought.order+' data-id='+thought.id+'>';
 								card +='<div class="content">';
-									card +='<p>'+thought.text+'</p>';
+									card +='<p data-id='+thought.id+'>'+thought.text+'</p>';
 								card +='</div>';
 								card +='<div class="inline-buttons">';
 									card +='<button class="light-blue square">Drag to Promote</button>';
@@ -58,7 +58,7 @@ define(function (require) {
 								card +='<div class="content">';
 									section.Thoughts.forEach(function (thought) {
 										if(thought.state==true){
-											card +='<p>'+thought.text+'</p>';
+											card +='<p data-id='+thought.id+'>'+thought.text+'</p>';
 										}
 									});
 								card +='</div>';
@@ -130,6 +130,24 @@ define(function (require) {
 						}
 					});
 					Mousetrap.bind('tab', function(e) {
+						if($('.section.card').hasClass('active')){
+							var sId= $('.section.card.active').attr('data-id');
+							var tId= $('.section.card.active p').attr('data-id');
+							P.App.Store.iterateThought('Thought',1,sId,tId,function(data){
+								var thought = data;
+								var card='';
+								card +='<div class="thought card" data-sID='+thought.sID+' data-order='+thought.order+' data-id='+thought.id+'>';
+									card +='<div class="content">';
+										card +='<p data-id='+thought.id+'>'+thought.text+'</p>';
+									card +='</div>';
+									card +='<div class="inline-buttons">';
+										card +='<button class="light-blue square">Drag to Promote</button>';
+									card +='</div>';
+								card +='</div>';
+								$('#sectionThoughts').append(card);
+							})
+
+						}
 					})
 
 			/*--------------------VIEW LAYER--------------*/

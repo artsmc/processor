@@ -3,6 +3,7 @@ P.App = new function(options){
   'use strict';
   this.Store={
     Projects:returnStore(),
+    Items:[],
     new:function(type){
       var process = new P.App.Store['_'+type];
       P.App.Store.Projects.push(process);
@@ -17,6 +18,25 @@ P.App = new function(options){
         sections.push(section);
         if(callback){callback(section)};
         return section;
+    },
+    iterateThought:function(type,pID,sId,tID,callback){
+        var thoughts = P.App.Store.Projects[pID-1].Sections[sId-1].Thoughts;
+        thoughts.forEach(function (thought) {
+          if(thought.id===Number(tID)){
+            var defaults ={
+              id:thoughts.length+1,
+              sID:Number(sId),
+              order:thoughts.length+1,
+              text : thought.text,
+              state: false
+            };
+            var thought = new P.App.Store['_Thought'](defaults);
+            thoughts.push(thought);
+            if(callback){callback(thought)};
+            return thought;    
+          }
+        });
+        saveState();
     },
     _Project:(function() {
       'use strict';
