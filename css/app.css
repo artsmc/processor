@@ -3159,6 +3159,11 @@ button.btn-naked, .btn-naked {
     button.btn-naked.blue-active:hover, .btn-naked.blue-active:hover {
       color: #00baff; }
 
+button.btn-cta.blue.square {
+  position: absolute;
+  right: -125px;
+  top: 15px; }
+
 button.btn-cta, .button-primary, .btn-cta {
   line-height: 1em;
   min-height: 1em;
@@ -3189,6 +3194,10 @@ button.btn-cta, .button-primary, .btn-cta {
   /* Firefox */
   -ms-backface-visibility: hidden;
   /* Internet Explorer */
+  -webkit-transition: opacity 500ms ease;
+  -moz-transition: opacity 500ms ease;
+  -ms-transition: opacity 500ms ease;
+  -o-transition: opacity 500ms ease;
   -webkit-transition: background-color 250ms ease;
   -moz-transition: background-color 250ms ease;
   -ms-transition: background-color 250ms ease;
@@ -3217,13 +3226,18 @@ button.btn-cta, .button-primary, .btn-cta {
     -webkit-background-clip: padding-box;
     background-clip: padding-box; }
   button.btn-cta.blue, .button-primary.blue, .btn-cta.blue {
-    background-color: #42b5e8;
-    background: -webkit-gradient(linear, left top, left bottom, from(#42b5e8), to(#10395d));
-    background: -webkit-linear-gradient(top, #42b5e8, #10395d);
-    background: -moz-linear-gradient(top, #42b5e8, #10395d);
-    background: -ms-linear-gradient(top, #42b5e8, #10395d);
-    background: -o-linear-gradient(top, #42b5e8, #10395d);
-    color: white; }
+    background-color: #4CABEA;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(76, 171, 234, 0.55);
+    -moz-box-shadow: 0 1px 2px 0 rgba(76, 171, 234, 0.55);
+    box-shadow: 0 1px 2px 0 rgba(76, 171, 234, 0.55);
+    color: white;
+    opacity: 0; }
+    button.btn-cta.blue:hover, .button-primary.blue:hover, .btn-cta.blue:hover {
+      background-color: #4dacea; }
+    button.btn-cta.blue.active, .button-primary.blue.active, .btn-cta.blue.active {
+      opacity: 1; }
+    button.btn-cta.blue.hide, .button-primary.blue.hide, .btn-cta.blue.hide {
+      opacity: 0; }
 
 input[type="text"] {
   background: #fff;
@@ -4766,7 +4780,8 @@ body {
   top: 59px;
   display: block;
   width: 100%;
-  height: 70vh; }
+  height: 70vh;
+  overflow-x: auto; }
 
 .footer {
   position: absolute;

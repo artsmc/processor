@@ -32,12 +32,12 @@ P.App = new function(options){
               pID:this.id
             });
             this.Sections.push(section);
-            callback(section);
+            if(callback){callback(section)};
             return section;
           }else{
             var version = new P.App.Store['_'+type]({id:this.Versions.length+1});
             this.Versions.push(version);
-            callback(version);
+            if(callback){callback(version)};
             return version;
           }
         };
@@ -68,7 +68,7 @@ P.App = new function(options){
                 thought.update = new Date();
                 thought.changes = thought.changes+1
               }
-              callback(thought);
+              if(callback){callback(thought)};
             })
             saveState();
           }
@@ -76,7 +76,7 @@ P.App = new function(options){
             this.Thoughts = $.grep(this.Thoughts, function(e){ 
                  return e.id != id; 
             });
-            callback(id)
+            if(callback){callback(id)};
             saveState();
           }
           _Section.prototype.iterate = function(id,callback){
@@ -92,7 +92,7 @@ P.App = new function(options){
                 });
                 var thought = new P.App.Store['_Thought'](defaults);
                 sThought.push(thought);
-                callback(thought);
+                if(callback){callback(thought)};
                 return thought;    
               }
             });
@@ -130,7 +130,7 @@ P.App = new function(options){
               order:this.Thoughts.length+1,
             }));
             this.Thoughts.push(thought);
-            callback(thought)
+            if(callback){callback(thought)};
             saveState();
             return thought;
           }
