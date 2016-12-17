@@ -1,23 +1,22 @@
-var P = P || {};
+var P;
+window.P = P || {};
 P.App = new function(options){
   'use strict';
   this.Store={
     Projects:returnStore(),
     Items:[],
     new:function(type){
-      var process = new P.App.Store['_'+type];
-      P.App.Store.Projects.push(process);
-      return process;
+      var $this = P.App.Store.Projects.push(new P.App.Store['_'+type]);
+      return P.App.Store.Projects[$this-1];  
     },
     addSection:function(type,pID,callback){
         var sections = P.App.Store.Projects[pID-1].Sections;
-        var section = new P.App.Store['_'+type]({
+        var $this = sections.push(new P.App.Store['_'+type]({
           id:sections.length+1,
           pID:pID
-        });
-        sections.push(section);
-        if(callback){callback(section)};
-        return section;
+        }));
+        if(callback){callback(P.App.Store.Projects[pID-1].Sections[$this-1])};
+        return P.App.Store.Projects[pID-1].Sections[$this-1];
     },
     iterateThought:function(type,pID,sId,tID,callback){
         var thoughts = P.App.Store.Projects[pID-1].Sections[sId-1].Thoughts;
@@ -30,13 +29,18 @@ P.App = new function(options){
               text : thought.text,
               state: false
             };
-            var thought = new P.App.Store['_Thought'](defaults);
-            thoughts.push(thought);
-            if(callback){callback(thought)};
-            return thought;    
+            var $this = thoughts.push(new P.App.Store['_Thought'](defaults));
+            console.log(thoughts[$this-1])
+            if(callback){callback(thoughts[$this-1])};
+            return thoughts[$this-1];    
           }
         });
-        saveState();
+        P.App.Store.saveState();
+    },
+    updateThought:function(pID,sId,tID,params,callback){
+        var section = P.App.Store.Projects[pID-1].Sections[sId-1];
+        section.updateThought(Number(tID),params,callback);
+        P.App.Store.saveState()
     },
     _Project:(function() {
       'use strict';
@@ -61,7 +65,6 @@ P.App = new function(options){
             return version;
           }
         };
-        
       }
       return _Project;
     }()),
@@ -81,29 +84,28 @@ P.App = new function(options){
         //PUBLIC METHODS
           _Section.prototype.updateThought = function(id,value,callback){
             this.Thoughts.forEach(function(thought){
-              if(thought.id===id){
+              if(thought.id===Number(id)){
                 thought.order = value.order || thought.order;
                 thought.text = value.text || thought.text;
                 thought.state = value.state || thought.state;
                 thought.update = new Date();
-                thought.changes = thought.changes+1
+                thought.changes = thought.changes+1;
               }
-              if(callback){callback(thought)};
             })
-            saveState();
+            P.App.Store.saveState()
           }
           _Section.prototype.removeThought = function(id,callback){
             this.Thoughts = $.grep(this.Thoughts, function(e){ 
-                 return e.id != id; 
+                 return e.id != Number(id); 
             });
             if(callback){callback(id)};
-            saveState();
+            P.App.Store.saveState();
           }
           _Section.prototype.iterate = function(id,callback){
             var options = this._defaults;
             var sThought = this.Thoughts;
             this.Thoughts.forEach(function (thought) {
-              if(thought.id===id){
+              if(thought.id===Number(id)){
                 var defaults = extendDefaults(options,{
                   id:sThought.length+1,
                   order:sThought.length+1,
@@ -116,7 +118,7 @@ P.App = new function(options){
                 return thought;    
               }
             });
-            saveState();
+            P.App.Store.saveState();
           }
           _Section.prototype.updateOrder = function(org,des){
             var move;
@@ -141,18 +143,17 @@ P.App = new function(options){
             this.Thoughts.sort(function(a, b) {
                 return parseFloat(a.order) - parseFloat(b.order);
             });
-            saveState();
+            P.App.Store.saveState();
           }
           _Section.prototype.new = function(type,options,callback){
             var defaults = extendDefaults(this._defaults, arguments[1]);
-            var thought = new P.App.Store['_'+type](extendDefaults(defaults,{
+            var $this = this.Thoughts.push(new P.App.Store['_'+type](extendDefaults(defaults,{
               id:this.Thoughts.length+1,
               order:this.Thoughts.length+1,
-            }));
-            this.Thoughts.push(thought);
-            if(callback){callback(thought)};
-            saveState();
-            return thought;
+            })));
+            if(callback){callback(this.Thoughts[$this-1])};  
+            P.App.Store.saveState();
+            return this.Thoughts[$this-1];
           }
         //PRIVATE METHODS
           function sortNumber(a,b) {
@@ -202,10 +203,6 @@ P.App = new function(options){
     this.init = function(){
     }
   //PRIVATE METHODS
-    function saveState(){
-      localStorage.setItem('DataStore', JSON.stringify([]));
-      localStorage.setItem('DataStore', JSON.stringify(P.App.Store.Projects));
-    }
     function returnStore(){
       if (localStorage.getItem("DataStore") === null) {
         return [];
@@ -223,6 +220,142 @@ P.App = new function(options){
       return source;
     }
 }
+P._Project = (function() {
+  'use strict';
+  function _Project(args) {
+    this.new = function(type,callback){
+      if(type==="Section"){
+        var section = new P.App.Store['_'+type]({
+          id:this.Sections.length+1,
+          pID:this.id
+        });
+        this.Sections.push(section);
+        if(callback){callback(section)};
+        return section;
+      }else{
+        var version = new P.App.Store['_'+type]({id:this.Versions.length+1});
+        this.Versions.push(version);
+        if(callback){callback(version)};
+        return version;
+      }
+    };
+  }
+  return _Project;
+}());
+P._Section=(function() {
+  'use strict';
+  function _Section(args) {
+    
+    //PUBLIC METHODS
+      this.updateThought = function(id,value,callback){
+        this.Thoughts.forEach(function(thought){
+          if(thought.id===id){
+            thought.order = value.order || thought.order;
+            thought.text = value.text || thought.text;
+            thought.state = value.state || thought.state;
+            thought.update = new Date();
+            thought.changes = thought.changes+1;
+            if(callback){callback(thought)};
+          }
+        })
+        P.App.Store.saveState();
+      }
+      this.removeThought = function(id,callback){
+        this.Thoughts = $.grep(this.Thoughts, function(e){ 
+             return e.id != id; 
+        });
+        if(callback){callback(id)};
+        P.App.Store.saveState()
+      }
+      this.iterate = function(id,callback){
+        var options = this._defaults;
+        var sThought = this.Thoughts;
+        this.Thoughts.forEach(function (thought) {
+          if(thought.id===id){
+            var defaults = extendDefaults(options,{
+              id:sThought.length+1,
+              order:sThought.length+1,
+              text : thought.text,
+              state: false
+            });
+            var thought = new P.App.Store['_Thought'](defaults);
+            sThought.push(thought);
+            if(callback){callback(thought)};
+            return thought;    
+          }
+        });
+        P.App.Store.saveState()
+      }
+      this.updateOrder = function(org,des){
+        var move;
+        if(org>des){
+          move="up";
+          var range=this.Thoughts.slice(des-1,org)
+        }else{
+          move="down";
+          var range=this.Thoughts.slice(org-1,des)
+        }
+        this.Thoughts.forEach(function (thought) {
+          if(thought.order===org){
+            thought.order=des;
+          }else{
+            if(move==="up"){
+              thought.order=thought.order+1;
+            }else{
+              thought.order=thought.order-1
+            }
+          } 
+        });
+        this.Thoughts.sort(function(a, b) {
+            return parseFloat(a.order) - parseFloat(b.order);
+        });
+        P.App.Store.saveState()
+      }
+      this.new = function(type,options,callback){
+        var defaults = extendDefaults(this._defaults, arguments[1]);
+        var $this = this.Thoughts.push(new P.App.Store['_'+type](extendDefaults(defaults,{
+          id:this.Thoughts.length+1,
+          order:this.Thoughts.length+1,
+        })));
+        if(callback){callback(this.Thoughts[$this-1])};  
+        P.App.Store.saveState()
+        return this.Thoughts[$this-1];
+      }
+    //PRIVATE METHODS
+      function sortNumber(a,b) {
+        return a - b;
+      }
+      function findState(Tht){
+        if(Tht.length<1){
+          return true;
+        }else{
+          Tht.forEach(function (thought) {
+            if(thought.state===true){
+               return false;
+            }else{
+                return true;
+            }
+          });
+        }
+      }
+  }
+  return _Section;
+}()),
+P.App.Store.saveState = function(){
+  localStorage.setItem('DataStore', JSON.stringify([]));
+  localStorage.setItem('DataStore', JSON.stringify(P.App.Store.Projects));
+}
+window.onload= (function() {
+  P.App.Store.Projects.forEach(function (project) {
+    project.__proto__ = new P._Project();
+    project.Sections.forEach(function (section) {
+      section.__proto__ = new P._Section();
+      section.Thoughts.forEach(function (thought) {
+        //thought.__proto__ = new P._Section();
+      });
+    });
+  });
+}())
 //P.App.Store.new('Project')
 /*var coolPrject= P.App.Store.new('Project')
 var coolSection = coolPrject.new('Section');

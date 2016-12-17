@@ -4,10 +4,10 @@ define(function (require) {
 	require('mousetrap');
   		$(function() {//start doing cool shit here 
 			$('textarea').autogrow({onInitialize: true});
-			Sortable.create(section, { /* options */ });
+			var sortThoughts = Sortable.create(section, { /* options */ });
 			Sortable.create(sectionThoughts, { /* options */ });
 			var Store = P.App.Store.Projects;
-			console.log(P.App.Store)
+			//console.log(P)
 			/*--------------------VIEW LAYER--------------*/
 				//PUBLIC METHODS]
 					if(Store[0] !=undefined){
@@ -34,7 +34,7 @@ define(function (require) {
 						$('#sectionThoughts .card').remove();
 						opt.thoughts.forEach(function (thought) {
 							var card='';
-							card +='<div class="thought card" data-sID='+thought.sID+' data-order='+thought.order+' data-id='+thought.id+'>';
+							card +='<div class="thought card" data-sID='+thought.SectionID+' data-order='+thought.order+' data-id='+thought.id+'>';
 								card +='<div class="content">';
 									card +='<p data-id='+thought.id+'>'+thought.text+'</p>';
 								card +='</div>';
@@ -69,6 +69,8 @@ define(function (require) {
 							card +='</div>';
 							$('#section').append(card);
 						});
+						//sortThoughts.destroy();
+						//sortThoughts.create();
 					}
 					function clickSection(card){
 						var tcard= card;
@@ -107,6 +109,19 @@ define(function (require) {
 						var thisCard = $(this);
 						clickSection(thisCard);
 					});
+					$('#submit').on('click', function(e) {
+						if($('.footer textarea').hasClass('typing')){
+							if(!$('.footer textarea').val()){
+								$('.footer button').toggleClass('hide active');
+							}else{
+								$('.footer button').toggleClass('hide active');
+								newSection({text:$('.footer textarea').val()});
+								$('.footer textarea').val('');
+							}
+						}else{
+							console.log('issue error');
+						}
+					});
 					$('.footer textarea').bind('input propertychange', function() {
 					      if(this.value.length>1 && $('.footer button').hasClass('hide')){
 					        $('.footer button').toggleClass('hide active');
@@ -115,16 +130,28 @@ define(function (require) {
 					      }
 					});
 					Mousetrap.bind('alt+enter', function(e) {
+						console.log('So you press buttons')
 						if($('.footer textarea').hasClass('typing')){
 							if(!$('.footer textarea').val()){
-								console.log('please type something');
 								$('.footer button').toggleClass('hide active');
 							}else{
-								console.log('you ready to make something')
 								$('.footer button').toggleClass('hide active');
 								newSection({text:$('.footer textarea').val()});
 								$('.footer textarea').val('');
 							}
+						}else if ($('.thought.card').hasClass('typing')){
+								var $this = $('.thought.card.typing');
+								var sId= $('.thought.card.typing').attr('data-sid');
+								var tId= $('.thought.card.typing textarea').attr('data-id');
+								//console.log($('.thought.card.typing textarea').val())
+								P.App.Store.updateThought(1,sId,tId,{text:$('.thought.card.typing textarea').val()},function(data){
+									var $this = $('.thought.card.typing');
+									//console.log(data);
+									$this.find('.content').append('<p>'+data.text+'</p>');
+									$this.find('textarea').remove();
+									var $this = $('.thought.card').removeClass('typing');
+								});
+
 						}else{
 							console.log('issue error');
 						}
@@ -136,15 +163,21 @@ define(function (require) {
 							P.App.Store.iterateThought('Thought',1,sId,tId,function(data){
 								var thought = data;
 								var card='';
-								card +='<div class="thought card" data-sID='+thought.sID+' data-order='+thought.order+' data-id='+thought.id+'>';
+								card +='<div class="thought card" data-sID='+sId+' data-order='+thought.order+' data-id='+thought.id+'>';
 									card +='<div class="content">';
-										card +='<p data-id='+thought.id+'>'+thought.text+'</p>';
+										card +='<textarea data-id='+thought.id+' id='+thought.id+'>'+thought.text+'</textarea>';
 									card +='</div>';
 									card +='<div class="inline-buttons">';
 										card +='<button class="light-blue square">Drag to Promote</button>';
 									card +='</div>';
 								card +='</div>';
 								$('#sectionThoughts').append(card);
+								$('#'+thought.id).focus(function(){
+									var $this = $(this);
+									$this.closest('.card').addClass('typing');
+									$this.select();
+								    $this.addClass('mousetrap');
+								});
 							})
 
 						}

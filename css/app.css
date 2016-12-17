@@ -2899,6 +2899,7 @@ button, .btn-default, button.btn-default, button.btn-naked, .btn-naked, button.b
     position: relative; }
 
 button, .btn-default {
+  cursor: pointer;
   line-height: 1em;
   min-height: 1em;
   background-color: #e0e1e2;
@@ -3165,6 +3166,8 @@ button.btn-cta.blue.square {
   top: 15px; }
 
 button.btn-cta, .button-primary, .btn-cta {
+  cursor: pointer;
+  z-index: 7;
   line-height: 1em;
   min-height: 1em;
   background-color: #d7d7d7;
