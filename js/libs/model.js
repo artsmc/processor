@@ -65,7 +65,14 @@ P.App = new function(options){
             return version;
           }
         };
-      }
+        _Project.prototype.removeSection = function(id,callback){
+          this.Sections = $.grep(this.Sections, function(e){ 
+               return e.id != Number(id); 
+          });
+          if(callback){callback(id)};
+          P.App.Store.saveState();
+        }
+    }
       return _Project;
     }()),
     _Section:(function() {
@@ -223,6 +230,13 @@ P.App = new function(options){
 P._Project = (function() {
   'use strict';
   function _Project(args) {
+    this.removeSection = function(id,callback){
+      this.Sections = $.grep(this.Sections, function(e){ 
+           return e.id != Number(id); 
+      });
+      if(callback){callback(id)};
+      P.App.Store.saveState();
+    }
     this.new = function(type,callback){
       if(type==="Section"){
         var section = new P.App.Store['_'+type]({

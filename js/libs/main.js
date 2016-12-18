@@ -20,7 +20,7 @@ define(function (require) {
 									});
 								card +='</div>';
 								card +='<div class="inline-buttons">';
-									card +='<button class="red square">Delect Section</button>';
+									card +='<button class="red square" id="delete" data-action="delete">Delect Section</button>';
 									card +='<button class="light-blue square">Tab to Iterate</button>';
 								card +='</div>';
 							card +='</div></li>';
@@ -63,7 +63,7 @@ define(function (require) {
 									});
 								card +='</div>';
 								card +='<div class="inline-buttons">';
-									card +='<button class="red square">Delect Section</button>';
+									card +='<button class="red square" id="delete" data-action="delete">Delete Section</button>';
 									card +='<button class="light-blue square">Tab to Iterate</button>';
 								card +='</div>';
 							card +='</div></li>';
@@ -124,6 +124,12 @@ define(function (require) {
 							console.log('issue error');
 						}
 					});
+					$('#delete').on('click', function(e){
+						$this = $(this).closest('.card');
+						var sId= Number($this.attr('data-id'));
+						Store[0].removeSection(sId)
+						$this.remove();
+					})
 					$('.footer textarea').bind('input propertychange', function() {
 					      if(this.value.length>1 && $('.footer button').hasClass('hide')){
 					        $('.footer button').toggleClass('hide active');
