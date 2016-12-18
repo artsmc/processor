@@ -229,6 +229,32 @@
 		min-width: 320px;
 		margin:0 auto;
 	}
+
+	body.dragging, body.dragging * {
+	  cursor: move !important;
+	}
+
+	.dragged {
+	  position: absolute;
+	  opacity: 0.5;
+	  z-index: 2000;
+	}
+	ol.section li {
+	  position: relative;
+	  /** More li styles **/
+	}
+	ol.section li:before {
+	  position: absolute;
+	  /** Define arrowhead **/
+	}
+	ol.sectionThoughts li {
+	  position: relative;
+	  /** More li styles **/
+	}
+	ol.sectionThoughts li:before {
+	  position: absolute;
+	  /** Define arrowhead **/
+	}
 //----------------------------BODY--------------------------
 	body{
 		display: block;

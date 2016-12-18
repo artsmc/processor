@@ -4,8 +4,6 @@ define(function (require) {
 	require('mousetrap');
   		$(function() {//start doing cool shit here 
 			$('textarea').autogrow({onInitialize: true});
-			var sortThoughts = Sortable.create(section, { /* options */ });
-			Sortable.create(sectionThoughts, { /* options */ });
 			var Store = P.App.Store.Projects;
 			//console.log(P)
 			/*--------------------VIEW LAYER--------------*/
@@ -13,7 +11,7 @@ define(function (require) {
 					if(Store[0] !=undefined){
 						Store[0]['Sections'].forEach(function (section) {
 							var card='';
-							card +='<div class="section card" data-order='+section.order+' data-id='+section.id+'>';
+							card +='<li><div class="section card" data-order='+section.order+' data-id='+section.id+'>';
 								card +='<div class="content">';
 									section.Thoughts.forEach(function (thought) {
 										if(thought.state==true){
@@ -25,8 +23,8 @@ define(function (require) {
 									card +='<button class="red square">Delect Section</button>';
 									card +='<button class="light-blue square">Tab to Iterate</button>';
 								card +='</div>';
-							card +='</div>';
-							$('#section').append(card);
+							card +='</div></li>';
+							$('#section ol').append(card);
 						});
 					}
 				//PRIVATE METHODS
@@ -34,16 +32,18 @@ define(function (require) {
 						$('#sectionThoughts .card').remove();
 						opt.thoughts.forEach(function (thought) {
 							var card='';
-							card +='<div class="thought card" data-sID='+thought.SectionID+' data-order='+thought.order+' data-id='+thought.id+'>';
+							card +='<li><div class="thought card" data-sID='+thought.SectionID+' data-order='+thought.order+' data-id='+thought.id+'>';
 								card +='<div class="content">';
 									card +='<p data-id='+thought.id+'>'+thought.text+'</p>';
 								card +='</div>';
 								card +='<div class="inline-buttons">';
 									card +='<button class="light-blue square">Drag to Promote</button>';
 								card +='</div>';
-							card +='</div>';
-							$('#sectionThoughts').append(card);
+							card +='</div></li>';
+							$('#sectionThoughts ol').append(card);
 						});
+						$("#sectionThoughts ol").sortable({ axis: "y" });
+						$("#sectionThoughts ol").disableSelection();
 					}
 					function newSection(params){
 						if(Store[0] ==undefined){
@@ -54,7 +54,7 @@ define(function (require) {
 						}
 						section.new('Thought',params,function(data){
 							var card='';
-							card +='<div class="section card" data-order='+section.order+' data-id='+section.id+'>';
+							card +='<li><div class="section card" data-order='+section.order+' data-id='+section.id+'>';
 								card +='<div class="content">';
 									section.Thoughts.forEach(function (thought) {
 										if(thought.state==true){
@@ -66,8 +66,8 @@ define(function (require) {
 									card +='<button class="red square">Delect Section</button>';
 									card +='<button class="light-blue square">Tab to Iterate</button>';
 								card +='</div>';
-							card +='</div>';
-							$('#section').append(card);
+							card +='</div></li>';
+							$('#section ol').append(card);
 						});
 						//sortThoughts.destroy();
 						//sortThoughts.create();
@@ -85,8 +85,10 @@ define(function (require) {
 							loadThoughts({thoughts:thoughts.Thoughts});
 						}
 					}
-
-
+					setTimeout(function(){
+						$("#section ol").sortable({ axis: "y" });
+						$("#section ol").disableSelection();
+					},500);
 				/*-------EVENTS----------*/
 					$('.footer textarea').on('focus', function(e){
 						$(this).addClass('typing mousetrap');
@@ -163,15 +165,15 @@ define(function (require) {
 							P.App.Store.iterateThought('Thought',1,sId,tId,function(data){
 								var thought = data;
 								var card='';
-								card +='<div class="thought card" data-sID='+sId+' data-order='+thought.order+' data-id='+thought.id+'>';
+								card +='<li><div class="thought card" data-sID='+sId+' data-order='+thought.order+' data-id='+thought.id+'>';
 									card +='<div class="content">';
 										card +='<textarea data-id='+thought.id+' id='+thought.id+'>'+thought.text+'</textarea>';
 									card +='</div>';
 									card +='<div class="inline-buttons">';
 										card +='<button class="light-blue square">Drag to Promote</button>';
 									card +='</div>';
-								card +='</div>';
-								$('#sectionThoughts').append(card);
+								card +='</div></li>';
+								$('#sectionThoughts ol').append(card);
 								$('#'+thought.id).focus(function(){
 									var $this = $(this);
 									$this.closest('.card').addClass('typing');
