@@ -9,15 +9,6 @@ P.App = new function(options){
       var $this = P.App.Store.Projects.push(new P.App.Store['_'+type]);
       return P.App.Store.Projects[$this-1];  
     },
-    addSection:function(type,pID,callback){
-        var sections = P.App.Store.Projects[pID-1].Sections;
-        var $this = sections.push(new P.App.Store['_'+type]({
-          id:sections.length+1,
-          pID:pID
-        }));
-        if(callback){callback(P.App.Store.Projects[pID-1].Sections[$this-1])};
-        return P.App.Store.Projects[pID-1].Sections[$this-1];
-    },
     iterateThought:function(type,pID,sId,tID,callback){
         var thoughts = P.App.Store.Projects[pID-1].Sections[sId-1].Thoughts;
         thoughts.forEach(function (thought) {
@@ -45,14 +36,14 @@ P.App = new function(options){
     _Project:(function() {
       'use strict';
       function _Project(args) {
-        this.id = P.App.Store.Projects.length+1;
         this.name ="";
         this.Sections=[];
         this.Versions=[]; 
+        this.id = updateID(this.Sections);
         _Project.prototype.new = function(type,callback){
           if(type==="Section"){
             var section = new P.App.Store['_'+type]({
-              id:this.Sections.length+1,
+              id:updateID(this.Sections),
               pID:this.id
             });
             this.Sections.push(section);
@@ -72,6 +63,22 @@ P.App = new function(options){
           if(callback){callback(id)};
           P.App.Store.saveState();
         }
+        _Project.prototype.updateID= function(Sections){
+          updateID.call(this,Sections);
+        }
+
+        //PRIVATE
+          function updateID(Sections){
+            var maxID=0;
+            if(Sections.length>= 1){
+              maxID = Math.max.apply(Math, Sections.map(function(o){ 
+                return o.id;
+              }))
+            }else{
+              return 1;
+            }
+            return maxID+1;
+          }
     }
       return _Project;
     }()),
@@ -83,7 +90,7 @@ P.App = new function(options){
         this.order =args.id;
         this.Thoughts=[]; 
         this._defaults= {
-          id:this.Thoughts.length+1,
+          id:updateID(this.Thoughts),
           order:this.Thoughts.length+1,
           sID:this.id,
           state: findState(this.Thoughts)
@@ -162,9 +169,29 @@ P.App = new function(options){
             P.App.Store.saveState();
             return this.Thoughts[$this-1];
           }
+          _Section.prototype.findState= function(Tht){
+            findState.call(this,Tht);
+          }
+          _Section.prototype.updateID= function(Tht){
+            updateID.call(this,Tht);
+          }
         //PRIVATE METHODS
           function sortNumber(a,b) {
             return a - b;
+          }
+          function updateID(Tht){
+            //console.log(Tht); 
+            var maxID=0;
+            if(Tht.length> 1){
+              maxID = Math.max.apply(Math, Tht.map(function(o){ 
+                //console.log(o) 
+                return o.id;
+              }))
+            }else{
+              maxID++;
+            }
+            //console.log(maxID);
+            return maxID;
           }
           function findState(Tht){
             if(Tht.length<1){
@@ -217,15 +244,6 @@ P.App = new function(options){
         return JSON.parse(localStorage.getItem('DataStore'));
       }
     }
-    function extendDefaults(source, properties) {
-      var property;
-      for (property in properties) {
-        if (properties.hasOwnProperty(property)) {
-          source[property] = properties[property];
-        }
-      }
-      return source;
-    }
 }
 P._Project = (function() {
   'use strict';
@@ -240,7 +258,7 @@ P._Project = (function() {
     this.new = function(type,callback){
       if(type==="Section"){
         var section = new P.App.Store['_'+type]({
-          id:this.Sections.length+1,
+          id:updateID(this.Sections),
           pID:this.id
         });
         this.Sections.push(section);
@@ -253,6 +271,21 @@ P._Project = (function() {
         return version;
       }
     };
+    this.updateID= function(Sections){
+      updateID.call(this,Sections);
+    }
+    //PRIVATE
+          function updateID(Sections){
+            var maxID=0;
+            if(Sections.length>= 1){
+              maxID = Math.max.apply(Math, Sections.map(function(o){ 
+                return o.id;
+              }))
+            }else{
+              return 1;
+            }
+            return maxID+1;
+          }
   }
   return _Project;
 }());
@@ -354,7 +387,16 @@ P._Section=(function() {
       }
   }
   return _Section;
-}()),
+}());
+function extendDefaults(source, properties) {
+  var property;
+  for (property in properties) {
+    if (properties.hasOwnProperty(property)) {
+      source[property] = properties[property];
+    }
+  }
+  return source;
+}
 P.App.Store.saveState = function(){
   localStorage.setItem('DataStore', JSON.stringify([]));
   localStorage.setItem('DataStore', JSON.stringify(P.App.Store.Projects));

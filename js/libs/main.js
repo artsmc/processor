@@ -50,7 +50,7 @@ define(function (require) {
 							var prject= P.App.Store.new('Project');
 							var section = prject.new('Section');
 						}else{
-							var section = P.App.Store.addSection('Section',1)
+							var section = Store[0].new('Section');
 						}
 						section.new('Thought',params,function(data){
 							var card='';
@@ -75,14 +75,20 @@ define(function (require) {
 					function clickSection(card){
 						var tcard= card;
 						var id=tcard.attr('data-id');
-						var thoughts = Store[0]['Sections'][id-1] ||null;
+						var thoughts = Store[0]['Sections'].filter(function(section){
+							if(section.id===Number(id)){
+								return section;
+							}else{
+								return false;
+							}
+						});
 						if(tcard.hasClass('active')){
 							$('#sectionThoughts .card').remove();
 							$('.section.card').removeClass('active');
 						}else{
 							$('.section.card').removeClass('active');
 							tcard.toggleClass('active');
-							loadThoughts({thoughts:thoughts.Thoughts});
+							loadThoughts({thoughts:thoughts[0].Thoughts});
 						}
 					}
 					setTimeout(function(){
@@ -108,6 +114,8 @@ define(function (require) {
 						}
 					});
 					$('#section').on('click','.section.card',function(e){
+						e.stopPropagation();
+						e.preventDefault();
 						var thisCard = $(this);
 						clickSection(thisCard);
 					});
@@ -124,11 +132,15 @@ define(function (require) {
 							console.log('issue error');
 						}
 					});
-					$('#delete').on('click', function(e){
+					$('#section').on('click','#delete', function(e){
+						e.stopPropagation();
+						e.preventDefault();
 						$this = $(this).closest('.card');
 						var sId= Number($this.attr('data-id'));
-						Store[0].removeSection(sId)
+						if($this.hasClass('active')){$this.click()};
+						Store[0].removeSection(sId);
 						$this.remove();
+						
 					})
 					$('.footer textarea').bind('input propertychange', function() {
 					      if(this.value.length>1 && $('.footer button').hasClass('hide')){
@@ -152,13 +164,19 @@ define(function (require) {
 								var sId= $('.thought.card.typing').attr('data-sid');
 								var tId= $('.thought.card.typing textarea').attr('data-id');
 								//console.log($('.thought.card.typing textarea').val())
-								P.App.Store.updateThought(1,sId,tId,{text:$('.thought.card.typing textarea').val()},function(data){
+								var section = Store[0].Sections.filter(function(section){
+									if(section.id===Number(sId)){
+										return section;
+									}
+								});
+								section[0].updateThought(Number(tId),{text:$('.thought.card.typing textarea').val()},function(data){
 									var $this = $('.thought.card.typing');
 									//console.log(data);
 									$this.find('.content').append('<p>'+data.text+'</p>');
 									$this.find('textarea').remove();
 									var $this = $('.thought.card').removeClass('typing');
 								});
+								//P.App.Store.updateThought(1,sId,tId);
 
 						}else{
 							console.log('issue error');
@@ -168,7 +186,12 @@ define(function (require) {
 						if($('.section.card').hasClass('active')){
 							var sId= $('.section.card.active').attr('data-id');
 							var tId= $('.section.card.active p').attr('data-id');
-							P.App.Store.iterateThought('Thought',1,sId,tId,function(data){
+							var section = Store[0].Sections.filter(function(section){
+								if(section.id===Number(sId)){
+									return section;
+								}
+							});
+							section[0].iterate(Number(tId),function(data){
 								var thought = data;
 								var card='';
 								card +='<li><div class="thought card" data-sID='+sId+' data-order='+thought.order+' data-id='+thought.id+'>';
@@ -186,8 +209,7 @@ define(function (require) {
 									$this.select();
 								    $this.addClass('mousetrap');
 								});
-							})
-
+							});
 						}
 					})
 
