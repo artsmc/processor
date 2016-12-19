@@ -21,7 +21,7 @@ define(function (require) {
 								card +='</div>';
 								card +='<div class="inline-buttons">';
 									card +='<button class="red square" id="delete" data-action="delete">Delect Section</button>';
-									card +='<button class="light-blue square">Tab to Iterate</button>';
+									card +='<button class="light-blue square" id="tab">Tab to Iterate</button>';
 								card +='</div>';
 							card +='</div></li>';
 							$('#section ol').append(card);
@@ -64,7 +64,7 @@ define(function (require) {
 								card +='</div>';
 								card +='<div class="inline-buttons">';
 									card +='<button class="red square" id="delete" data-action="delete">Delete Section</button>';
-									card +='<button class="light-blue square">Tab to Iterate</button>';
+									card +='<button class="light-blue square" id="tab">Tab to Iterate</button>';
 								card +='</div>';
 							card +='</div></li>';
 							$('#section ol').append(card);
@@ -137,7 +137,40 @@ define(function (require) {
 						Store[0].removeSection(sId);
 						$this.remove();
 						
-					})
+					});
+					$('#section').on('click','#tab', function(e){
+						e.stopPropagation();
+						e.preventDefault();
+						$this = $(this).closest('.card');
+						if(!$this.hasClass('active')){$this.click()};
+						var sId= Number($this.attr('data-id'));
+						var tId= Number($this.find('p').attr('data-id'));
+						var section = Store[0].Sections.filter(function(section){
+							if(section.id===Number(sId)){
+								return section;
+							}
+						});
+						section[0].iterate(Number(tId),function(data){
+							var thought = data;
+							var card='';
+							card +='<li><div class="thought card" data-sID='+sId+' data-order='+thought.order+' data-id='+thought.id+'>';
+								card +='<div class="content">';
+									card +='<textarea data-id='+thought.id+' id='+thought.id+'>'+thought.text+'</textarea>';
+								card +='</div>';
+								card +='<div class="inline-buttons">';
+									card +='<button class="light-blue square">Drag to Promote</button>';
+								card +='</div>';
+							card +='</div></li>';
+							$('#sectionThoughts ol').append(card);
+							$('#'+thought.id).focus(function(){
+								var $this = $(this);
+								$this.closest('.card').addClass('typing');
+								$this.select();
+							    $this.addClass('mousetrap');
+							});
+						});
+						
+					});
 					$('.footer textarea').bind('input propertychange', function() {
 					      if(this.value.length>1 && $('.footer button').hasClass('hide')){
 					        $('.footer button').toggleClass('hide active');
