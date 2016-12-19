@@ -9,30 +9,6 @@ P.App = new function(options){
       var $this = P.App.Store.Projects.push(new P.App.Store['_'+type]);
       return P.App.Store.Projects[$this-1];  
     },
-    iterateThought:function(type,pID,sId,tID,callback){
-        var thoughts = P.App.Store.Projects[pID-1].Sections[sId-1].Thoughts;
-        thoughts.forEach(function (thought) {
-          if(thought.id===Number(tID)){
-            var defaults ={
-              id:thoughts.length+1,
-              sID:Number(sId),
-              order:thoughts.length+1,
-              text : thought.text,
-              state: false
-            };
-            var $this = thoughts.push(new P.App.Store['_Thought'](defaults));
-            console.log(thoughts[$this-1])
-            if(callback){callback(thoughts[$this-1])};
-            return thoughts[$this-1];    
-          }
-        });
-        P.App.Store.saveState();
-    },
-    updateThought:function(pID,sId,tID,params,callback){
-        var section = P.App.Store.Projects[pID-1].Sections[sId-1];
-        section.updateThought(Number(tID),params,callback);
-        P.App.Store.saveState()
-    },
     _Project:(function() {
       'use strict';
       function _Project(args) {

@@ -120,16 +120,12 @@ define(function (require) {
 						clickSection(thisCard);
 					});
 					$('#submit').on('click', function(e) {
-						if($('.footer textarea').hasClass('typing')){
-							if(!$('.footer textarea').val()){
-								$('.footer button').toggleClass('hide active');
-							}else{
-								$('.footer button').toggleClass('hide active');
-								newSection({text:$('.footer textarea').val()});
-								$('.footer textarea').val('');
-							}
+						if(!$('.footer textarea').val()){
+							$('.footer button').toggleClass('hide active');
 						}else{
-							console.log('issue error');
+							$('.footer button').toggleClass('hide active');
+							newSection({text:$('.footer textarea').val()});
+							$('.footer textarea').val('');
 						}
 					});
 					$('#section').on('click','#delete', function(e){
