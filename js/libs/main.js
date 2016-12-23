@@ -7,7 +7,11 @@ define(function (require) {
 			var Store = P.App.Store.Projects;
 			//console.log(P)
 			/*--------------------VIEW LAYER--------------*/
-				//PUBLIC METHODS]
+				onInt();
+				page(function(){
+
+				});
+				//DEFAULT VIEW
 					if(Store[0] !=undefined){
 						Store[0]['Sections'].forEach(function (section) {
 							var card='';
@@ -30,6 +34,9 @@ define(function (require) {
 				//PRIVATE METHODS
 					function loadThoughts(opt){
 						$('#sectionThoughts .card').remove();
+						opt.thoughts.sort(function(a, b) {
+						    return a.order - b.order;
+						});
 						opt.thoughts.forEach(function (thought) {
 							var card='';
 							card +='<li><div class="thought card" data-sID='+thought.SectionID+' data-order='+thought.order+' data-id='+thought.id+'>';
@@ -42,7 +49,12 @@ define(function (require) {
 							card +='</div></li>';
 							$('#sectionThoughts ol').append(card);
 						});
-						$("#sectionThoughts ol").sortable({ axis: "y" });
+						$("#sectionThoughts ol").sortable({
+						 axis: "y",
+						 stop: function(event, ui){
+						 	changeOrder(ui,'thought');
+						 }  
+						});
 						$("#sectionThoughts ol").disableSelection();
 					}
 					function newSection(params){
@@ -69,8 +81,6 @@ define(function (require) {
 							card +='</div></li>';
 							$('#section ol').append(card);
 						});
-						//sortThoughts.destroy();
-						//sortThoughts.create();
 					}
 					function clickSection(card){
 						var tcard= card;
@@ -91,8 +101,42 @@ define(function (require) {
 							loadThoughts({thoughts:thoughts[0].Thoughts});
 						}
 					}
+					function promoteThought(text){
+						$('.section.card.active').find('.content p').text(text);
+					}
+					function changeOrder(ui,type){
+						var sId;
+						var content;
+						var origin = Number(ui.item.find('div').attr('data-order'));
+						var des = Number(ui.item.index()+1);
+						if(type==='thought'){
+							sId = ui.item.find('.card').attr('data-sid');
+							var tId = ui.item.find('.card').attr('data-id');
+						} else{
+							sId= ui.item.find('.card').attr('data-id');
+						}
+						content = Store[0].Sections.filter(function(section){
+							if(section.id===Number(sId)){
+								return section;
+							}
+						});
+						if(type ==='thought'){
+							content[0].promoteThought(tId, function(data){
+								var text = $('ol.sectionThoughts li').eq(0).find('.card .content p').text();
+								promoteThought(text);
+							})
+						}
+						content[0].updateOrder(origin,des,function(data){
+							console.log(data);
+						});
+					}
 					setTimeout(function(){
-						$("#section ol").sortable({ axis: "y" });
+						$("#section ol").sortable({
+						 axis: "y",
+						 stop: function(event, ui){
+						 	changeOrder(ui,'section');
+						 } 
+						});
 						$("#section ol").disableSelection();
 					},500);
 				/*-------EVENTS----------*/
@@ -102,8 +146,7 @@ define(function (require) {
 							$('.footer button').toggleClass('hide active');
 						}else if(this.value.length<1 && $('.footer button').hasClass('active')){
 							$('.footer button').toggleClass('hide active');
-						}
-						
+						}					
 					});
 					$('.footer textarea').on('blur', function(e){
 						$(this).removeClass('typing mousetrap');
@@ -135,8 +178,7 @@ define(function (require) {
 						var sId= Number($this.attr('data-id'));
 						if($this.hasClass('active')){$this.click()};
 						Store[0].removeSection(sId);
-						$this.remove();
-						
+						$this.remove();	
 					});
 					$('#section').on('click','#tab', function(e){
 						e.stopPropagation();
@@ -169,7 +211,6 @@ define(function (require) {
 							    $this.addClass('mousetrap');
 							});
 						});
-						
 					});
 					$('.footer textarea').bind('input propertychange', function() {
 					      if(this.value.length>1 && $('.footer button').hasClass('hide')){
@@ -241,7 +282,13 @@ define(function (require) {
 							});
 						}
 					})
+				function onInt(){
 
+				}
+				function page(callback){
+
+					callback();
+				}
 			/*--------------------VIEW LAYER--------------*/
     	});//END APP
 });
